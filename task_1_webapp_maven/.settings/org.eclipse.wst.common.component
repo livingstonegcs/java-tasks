@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="task_1_webapp_maven">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="context-root" value="task_1_webapp_maven"/>
+        <property name="java-output-path" value="/task_1_webapp_maven/build/classes"/>
+    </wb-module>
+</project-modules>

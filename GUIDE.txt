@@ -1,0 +1,4 @@
+1. Creating a web-app named sort-app using mvn CLI
+	mvn archetype:generate -DgroupId=com.1stdibs.app -DartifactId=sort-app -DarchetypeArtifactId=maven-archetype-webapp -DarchetypeVersion=1.0 -DinteractiveMode=false 
+2. ONCE CREATED A web-app, Specify the runtime of the web-app in it's properties
+	
