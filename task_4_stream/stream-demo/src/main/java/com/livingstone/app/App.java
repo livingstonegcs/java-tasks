@@ -21,18 +21,27 @@ public class App {
     	
     	//Employee earning more than 1000 and joined 3 years ago
     	List<Employee> results = stream
-    							.filter(emp-> emp.getSalary()>1000 && getDiffYears(emp.getJoiningDate(), new Date())>=3)
-    							.collect(Collectors.toList());
+    			.filter(emp-> emp.getSalary()>1000 && getDiffYears(emp.getJoiningDate(), new Date())>=3)
+    			.collect(Collectors.toList());
+    	
     	printList(results);
     	
     	//Employee grouped by gender with maximum salary
     	stream = empList.stream();
     	Map<String , Employee> results2 = stream
-    								.collect(Collectors.groupingBy(Employee::getGender, 
-    											Collectors.collectingAndThen(
-    												Collectors.reducing( (Employee f1, Employee f2) -> f1.getSalary() > f2.getSalary() ? f1 : f2), Optional::get)
-    										));
+    			.collect(Collectors.groupingBy(Employee::getGender, 
+    					Collectors.collectingAndThen(
+    							Collectors.reducing( (Employee f1, Employee f2) -> f1.getSalary() > f2.getSalary() ? f1 : f2), Optional::get)));
     	System.out.println(results2);
+    	
+    	//Employee name reversed 
+    	stream = empList.stream();
+    	List<String> results3 = stream
+    			.map(emp -> (new StringBuilder(emp.getName()).reverse().toString()) )
+    			.collect(Collectors.toList());
+    	System.out.println(results3);
+    	
+    	printList(empList);
     }
     
 	//Custom method Random Employee Generation based on "num" integer;
@@ -76,30 +85,5 @@ public class App {
   	public static long getDiffYears(Date a, Date b) {
   		long diff = b.getTime() - a.getTime();
   		return (diff / (24 * 60 * 60 * 1000))/365;
-      }
-  	
-  	
-  	
-  	abstract class Testing {
-  		
-  		public abstract boolean test(int a , int b);
-  		
-  	}
-  	
-     class  TestingImpl extends Testing{
-
-		@Override
-		public boolean test(int a , int b) {
-			return a>b;
-		}
-  		
-  		
-  	}
-  	
-  	public boolean checkGreater(Testing test){
-  		
-  		return test.test(1,2);
-  		
-  	}
-  	
+    }
 }
