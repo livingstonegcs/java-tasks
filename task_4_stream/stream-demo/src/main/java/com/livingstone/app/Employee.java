@@ -1,7 +1,7 @@
 package com.livingstone.app;
 import java.util.Date;
 
-class Employee{
+class Employee implements Comparable<Employee>{
 	long id;
 	String name;
 	String gender;
@@ -71,6 +71,12 @@ class Employee{
 	public String toString() {
 		return "Employee [id=" + id + ", name=" + name + ", gender=" + gender + ", salary=" + salary + ", joiningDate="
 				+ joiningDate + ", state=" + state + "]";
+	}
+	
+	@Override
+	public int compareTo(Employee emp){
+		return name.compareTo(emp.name);
+		//return (int)(this.id - emp.id);
 	}
 	
 }

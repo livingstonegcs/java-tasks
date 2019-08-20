@@ -12,6 +12,11 @@ import java.util.stream.*;
 import java.util.DoubleSummaryStatistics;
 import java.util.Comparator;
 
+class EmployeeIdCompare implements Comparator< Employee > { 
+    public int compare(Employee emp1, Employee emp2) { 
+        return (int)(-emp1.getId() + emp2.getId()); 
+    }
+} 
 
 public class App {
 	
@@ -24,7 +29,7 @@ public class App {
     			.filter(emp-> emp.getSalary()>1000 && getDiffYears(emp.getJoiningDate(), new Date())>=3)
     			.collect(Collectors.toList());
     	
-    	printList(results);
+    	System.out.println(results);
     	
     	//2.Employee grouped by gender with maximum salary
     	stream = empList.stream();
@@ -41,11 +46,21 @@ public class App {
     			.collect(Collectors.toList());
     	System.out.println(results3);
     	
-    	
     	//4. Other field "randomString"
     	stream = empList.stream();
     	List<String> result4 = stream.map(emp -> (emp.getName()+emp.getJoiningDate()).replace(" ", "")).collect(Collectors.toList());
     	System.out.println(result4);
+    	
+    	//5.1 Sort Employees by id using Comparator
+    	stream = empList.stream();
+    	List<Employee> result5 = stream.sorted(new EmployeeIdCompare()).collect(Collectors.toList());
+    	System.out.println(result5);
+    	
+    	//5.2 Sort Employees by id implementing Comparable 
+    	stream = empList.stream();
+    	List<Employee> result6 = stream.sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+    	System.out.println(result6);
+    	
     	printList(empList);
     }
     
@@ -64,8 +79,6 @@ public class App {
 				"state"+(num%30)		
 				);
 	}
-	
-	
 	
 	//Generates "size" length list of Random Employees
 	public static ArrayList<Employee> generateRandomEmployees(int size){
